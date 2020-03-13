@@ -117,6 +117,8 @@ summary(predict)
 
 predict_attrition %>% ggplot(aes(x = Attrition, fill = Attrition)) + geom_histogram(stat="count") + ggtitle("Histogram of Prediction results")
 
+write.table(predict, file = "Case2PredictionsTRUONG Attrition.csv", sep=",")
+
 #check the accuracy of prediction results 
 table(results,test1$Attrition)
 CM_predict= confusionMatrix(table(results,test1$Attrition))
@@ -130,6 +132,10 @@ summary(salary.lm)
 
 results2 = predict(salary.lm, newdata= Predict_Salary)
 Predict_Salary$MonthlyIncome <- results2
+predict2 = Predict_Salary[,c("ID","MonthlyIncome")]
+summary(predict2)
+
+write.table(predict2, file = "Case2PredictionsTRUONG Salary.csv", sep=",")
 
 # Visualize data
 pairs(Predict_Salary[,c("MonthlyIncome","JobLevel","TotalWorkingYears","YearsAtCompany","MonthlyRate")])
